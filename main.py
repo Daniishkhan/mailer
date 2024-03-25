@@ -1,9 +1,18 @@
-"""this is a python file"""
+"""FastAPI example"""
+
+from typing import Union
+from fastapi import FastAPI
+
+app = FastAPI()
 
 
-def main():
-    """this is the main function"""
-    print("hello world!")
+@app.get("/")
+def read_root():
+    """Root path"""
+    return {"Hello": "World"}
 
 
-main()
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+    """Read item by id and query parameter"""
+    return {"item_id": item_id, "q": q}
